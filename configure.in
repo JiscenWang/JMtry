@@ -1,0 +1,64 @@
+## -*-m4-*-
+# $Id$
+
+dnl Process this file with autoconf to produce a configure script.
+
+# FILE:
+#
+# FUNCTION:
+# implements checks for a variety of system-specific functions
+
+AC_INIT(src/common.h)
+AM_CONFIG_HEADER(config.h)
+AC_CONFIG_AUX_DIR(config)
+AC_PROG_CC
+AC_PROG_CXX
+#AC_PROG_RANLIB
+
+AC_SUBST(BUILDROOT)
+
+#Versioning x.y.z tag for release
+JM_MAJOR_VERSION=0
+JM_MINOR_VERSION=0
+JM_MICRO_VERSION=2
+JM_VERSION=$JM_MAJOR_VERSION.$JM_MINOR_VERSION.$JM_MICRO_VERSION
+
+AC_SUBST(JM_MAJOR_VERSION)
+AC_SUBST(JM_MINOR_VERSION)
+AC_SUBST(JM_MICRO_VERSION)
+AC_SUBST(JM_VERSION)
+AM_INIT_AUTOMAKE(JMtry,$JM_VERSION)
+
+
+AM_MAINTAINER_MODE
+
+AC_PROG_INSTALL
+
+AC_LIBTOOL_DLOPEN
+AM_PROG_LIBTOOL
+
+AC_ISC_POSIX
+AC_C_BIGENDIAN
+AC_PROG_MAKE_SET
+AC_HEADER_STDC
+
+
+# check for pthread
+AC_CHECK_HEADER(pthread.h, , AC_MSG_ERROR(You need the pthread headers) )
+AC_CHECK_LIB(pthread, pthread_create, , AC_MSG_ERROR(You need the pthread library) )
+
+# libhttpd dependencies
+echo "Begining libhttpd dependencies check"
+AC_CHECK_HEADERS(string.h strings.h stdarg.h unistd.h)
+AC_HAVE_LIBRARY(socket)
+AC_HAVE_LIBRARY(nsl)
+echo "libhttpd dependencies check complete"
+
+AC_OUTPUT( 		Makefile 
+	   		JM.spec
+			JM-msg.html
+			src/Makefile
+			libhttpd/Makefile
+			)
+
+
