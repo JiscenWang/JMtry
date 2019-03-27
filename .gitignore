@@ -72,3 +72,5 @@ libhttpd/Makefile
 libhttpd/Makefile.in
 libtool
 stamp-h1
+.deps/
+.libs/
