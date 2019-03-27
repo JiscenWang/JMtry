@@ -52,23 +52,23 @@ Mkfile.old
 dkms.conf
 
 #eclipse files
-	.cproject
-	.project
-	.settings/
+.cproject
+.project
+.settings/
   
 #genarated files
-	JM-msg.html
-	JM.spec
-	Makefile
-	Makefile.in
-	aclocal.m4
-	autom4te.cache/
-	config.h
-	config.log
-	config.status
-	config/
-	configure
-	libhttpd/Makefile
-	libhttpd/Makefile.in
-	libtool
-	stamp-h1
+JM-msg.html
+JM.spec
+Makefile
+Makefile.in
+aclocal.m4
+autom4te.cache/
+config.h
+config.log
+config.status
+config/
+configure
+libhttpd/Makefile
+libhttpd/Makefile.in
+libtool
+stamp-h1
