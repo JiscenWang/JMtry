@@ -57,6 +57,7 @@ dkms.conf
 .settings/
   
 #genarated files
+JMtry
 JM-msg.html
 JM.spec
 Makefile
