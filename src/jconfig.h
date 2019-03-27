@@ -36,11 +36,11 @@
 
 /** Defaults configuration values */
 #ifndef SYSCONFDIR
-#define DEFAULT_CONFIGFILE "/etc/wifidog.conf"
-#define DEFAULT_HTMLMSGFILE "/etc/wifidog-msg.html"
+#define DEFAULT_CONFIGFILE "/etc/JM.conf"
+#define DEFAULT_HTMLMSGFILE "/etc/JM-msg.html"
 #else
-#define DEFAULT_CONFIGFILE SYSCONFDIR"/wifidog.conf"
-#define DEFAULT_HTMLMSGFILE SYSCONFDIR"/wifidog-msg.html"
+#define DEFAULT_CONFIGFILE SYSCONFDIR"/JM.conf"
+#define DEFAULT_HTMLMSGFILE SYSCONFDIR"/JM-msg.html"
 #endif
 #define DEFAULT_DAEMON 1
 #define DEFAULT_DEBUGLEVEL LOG_INFO
