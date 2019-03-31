@@ -2083,6 +2083,7 @@ int dhcp_data_req(struct dhcp_conn_t *conn,
   uint8_t *packet = pkt_buffer_head(pb);
   size_t length = pkt_buffer_length(pb);
 
+
   char do_checksum = 0;
   char allowed = 0;
 
@@ -2124,6 +2125,17 @@ int dhcp_data_req(struct dhcp_conn_t *conn,
   authstate = conn->authstate;
 
   dhcp_ethhdr(conn, packet, conn->hismac, dhcp_nexthop(this), PKT_ETH_PROTO_IP);
+
+  struct pkt_iphdr_t  *pack_iph  = pkt_iphdr(packet);
+  struct pkt_udphdr_t *pack_udph = pkt_udphdr(packet);
+
+  /* Was it a DNS response? */
+  if (pack_iph->protocol == PKT_IP_PROTO_UDP &&
+		  pack_udph->src == htons(DHCP_DNS)) {
+  	debug(LOG_DEBUG, "A DNS response");
+  	allowed = 1; /* Is allowed DNS */
+
+  }
 
   switch (authstate) {
 
