@@ -731,14 +731,12 @@ main_loop(void)
 
 
     /* Start control thread */
-    /*Jerome, withdraw
     result = pthread_create(&tid, NULL, (void *)thread_wdctl, (void *)safe_strdup(config->wdctl_sock));
     if (result != 0) {
         debug(LOG_ERR, "FATAL: Failed to create a new thread (wdctl) - exiting");
         termination_handler(0);
     }
     pthread_detach(tid);
-	End, Jerome*/
 
     /* Start heartbeat thread */
     /*Jerome, withdraw

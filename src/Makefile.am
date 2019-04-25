@@ -4,7 +4,8 @@
 
 noinst_LIBRARIES = libgateway.a
 
-bin_PROGRAMS = JMtry 
+bin_PROGRAMS = JMtry \
+	wdctl
  
 AM_CPPFLAGS = \
 	-I${top_srcdir}/libhttpd/ \
@@ -22,6 +23,7 @@ libgateway_a_SOURCES = jconfig.c \
 	jhttp.c \
 	client_list.c \
 	util.c \
+	wdctl_thread.c \
 	ping_thread.c \
 	safe.c \
 	simple_http.c \
@@ -38,6 +40,8 @@ noinst_HEADERS = common.h \
 	jhttp.h \
 	client_list.h \
 	util.h \
+	wdctl_thread.h \
+	wdctl.h \
 	ping_thread.h \
 	safe.h \
 	simple_http.h \
@@ -48,3 +52,5 @@ noinst_HEADERS = common.h \
 	jnet.h
 
 wdctl_LDADD = libgateway.a
+
+wdctl_SOURCES = wdctl.c
