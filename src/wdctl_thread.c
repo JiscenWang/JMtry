@@ -43,16 +43,11 @@
 #include "httpd.h"
 #include "util.h"
 #include "wd_util.h"
-#include "conf.h"
+#include "jconfig.h"
 #include "debug.h"
-#include "auth.h"
-#include "centralserver.h"
-#include "fw_iptables.h"
-#include "firewall.h"
 #include "client_list.h"
 #include "wdctl_thread.h"
-#include "commandline.h"
-#include "gateway.h"
+#include "jgateway.h"
 #include "safe.h"
 
 
@@ -342,9 +337,9 @@ wdctl_restart(int afd)
         close_icmp_socket();
         shutdown(afd, 2);
         close(afd);
-        debug(LOG_NOTICE, "Re-executing myself (%s)", restartargv[0]);
+        debug(LOG_NOTICE, "Re-executing myself");
         setsid();
-        execvp(restartargv[0], restartargv);
+//        execvp(restartargv[0], restartargv);
         /* If we've reached here the exec() failed - die quickly and silently */
         debug(LOG_ERR, "I failed to re-execute myself: %s", strerror(errno));
         debug(LOG_ERR, "Exiting without cleanup");
@@ -374,9 +369,6 @@ wdctl_reset(int fd, const char *arg)
     }
 
     debug(LOG_DEBUG, "Got node %x.", node);
-
-    /* deny.... */
-    logout_client(node);
 
     UNLOCK_CLIENT_LIST();
 

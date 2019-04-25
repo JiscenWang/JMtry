@@ -54,6 +54,7 @@
 #include "jgateway.h"
 #include "jhttp.h"
 #include "client_list.h"
+#include "wdctl_thread.h"
 #include "ping_thread.h"
 #include "util.h"
 
@@ -573,7 +574,7 @@ static void
 main_loop(void)
 {
     int result;
- //   pthread_t tid;
+    pthread_t tid;
     s_config *config = config_get_config();
 //    request *r;
 //    void **params;
