@@ -3196,7 +3196,7 @@ int dhcp_receive_ip(struct dhcp_ctx *ctx, uint8_t *pack, size_t len) {
   if ((memcmp(pack_ethh->dst, dhcp_nexthop(this), PKT_ETH_ALEN)) &&
       (memcmp(pack_ethh->dst, bmac, PKT_ETH_ALEN))) {
 
-	  debug(LOG_ERR, "Not for our MAC or broadcast: "MAC_FMT"",
+	  debug(LOG_DEBUG, "Not for our MAC or broadcast: "MAC_FMT"",
                MAC_ARG(pack_ethh->dst));
 
       return 0;
@@ -3222,7 +3222,7 @@ int dhcp_receive_ip(struct dhcp_ctx *ctx, uint8_t *pack, size_t len) {
 
   has_ip = conn->hisip.s_addr != 0;
   if (!has_ip){
-    debug(LOG_ERR, "no hisip; packet-drop");
+    debug(LOG_DEBUG, "no hisip; packet-drop");
     return 0;
   }
 
@@ -3568,7 +3568,7 @@ int dhcp_decaps_cb(void *pctx, struct pkt_buffer *pb) {
     case PKT_ETH_PROTO_PPP:
     case PKT_ETH_PROTO_IPX:
     default:
-        debug(LOG_ERR, "Layer2 PROT: 0x%.4x dropped", prot);
+        debug(LOG_DEBUG, "Layer2 PROT: 0x%.4x dropped", prot);
       break;
   }
 
