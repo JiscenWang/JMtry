@@ -108,6 +108,8 @@ typedef enum {
     oSSLCertPath,
     oSSLAllowedCipherList,
     oSSLUseSNI,
+/*Jerome Added*/
+    oLocalAuthPort,
 	oInternalIfDev
 } OpCodes;
 
@@ -117,8 +119,7 @@ static const struct {
     const char *name;
     OpCodes opcode;
 } keywords[] = {
-    {
-    "deltatraffic", oDeltaTraffic}, {
+    {"deltatraffic", oDeltaTraffic}, {
     "daemon", oDaemon}, {
     "debuglevel", oDebugLevel}, {
     "externalinterface", oExternalInterface}, {
@@ -144,7 +145,9 @@ static const struct {
     "sslpeerverification", oSSLPeerVerification}, {
     "sslcertpath", oSSLCertPath}, {
     "sslallowedcipherlist", oSSLAllowedCipherList}, {
-    "sslusesni", oSSLUseSNI}, {
+    "sslusesni", oSSLUseSNI},
+	/*Jerome Added*/
+	{"localauthport", oLocalAuthPort}, {
     "internalinterfacedev", oInternalIfDev},{
     NULL, oBadOption},};
 
@@ -189,6 +192,8 @@ config_init(void)
 
     config.gw_port = DEFAULT_GATEWAYPORT;
     config.gw_id = DEFAULT_GATEWAYID;
+
+    config.auth_port = DEFAULT_LOCALAUTHPORT;
 
     config.httpdname = NULL;
     config.popular_servers = NULL;
@@ -470,6 +475,9 @@ config_read(const char *filename)
                 case oGatewayID:
                     config.gw_id = safe_strdup(p1);
                     config.tundevname = config.gw_id;
+                    break;
+                case oLocalAuthPort:
+                    sscanf(p1, "%d", &config.auth_port);
                     break;
 
          /*####Jerome, checked end*/

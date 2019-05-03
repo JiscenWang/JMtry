@@ -47,6 +47,8 @@
 #define DEFAULT_HTTPDMAXCONN 10
 #define DEFAULT_GATEWAYID NULL
 #define DEFAULT_GATEWAYPORT 2060
+#define DEFAULT_LOCALAUTHPORT 2061
+
 #define DEFAULT_HTTPDNAME "WiFiDog"
 #define DEFAULT_CLIENTTIMEOUT 5
 #define DEFAULT_CHECKINTERVAL 60
@@ -208,6 +210,8 @@ typedef struct {
     char *gw_address;           /**< @brief Internal IP address for our web
 				     server */
     int gw_port;                /**< @brief Port the webserver will run on */
+
+    int auth_port;      /*Jerome add loacl auth port*/
 
     /*J-module add*/
 	char *tundevname;  /*self-defined name of tun dev*/

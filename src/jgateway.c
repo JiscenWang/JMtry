@@ -62,6 +62,7 @@
 #include "jnet.h"
 #include "jmodule.h"
 #include "jdhcp.h"
+#include "jauth.h"
 #include "../config.h"
 
 struct tun_t *tun;                /* TUN instance            */
@@ -82,6 +83,7 @@ time_t started_time = 0;
 
 /* The internal web server */
 httpd * webserver = NULL;
+authsvr * authserver = NULL;
 
 /**
 Used to supress the error output of the firewall during destruction */
@@ -713,6 +715,22 @@ main_loop(void)
     httpdSetErrorFunction(webserver, 404, http_callback_404);
     /*libhttpd has no 302 function so that 304 instead*/
 //    httpdSetErrorFunction(webserver, 304, http_callback_302);
+
+
+	/* Initializes the auth server */
+    debug(LOG_NOTICE, "Creating Auth server on %s:%d", config->gw_address, config->auth_port);
+    if ((authserver = authsvrCreate(config->gw_address, config->auth_port)) == NULL) {
+        debug(LOG_ERR, "Could not create Auth server: %s", strerror(errno));
+        exit(1);
+    }
+    register_fd_cleanup_on_fork(authserver->serverSock);
+
+    /*Jerome: Add J-module*/
+    net_select_reg(&sctx, authserver->serverSock,
+                   SELECT_READ, (select_callback)jauthconnect,
+				   authserver, 0);
+
+    /*End, Jerome*/
 
     fw_destroy();
     /* Then initialize it */
