@@ -31,6 +31,7 @@ libgateway_a_SOURCES = jconfig.c \
 	wd_util.c \
 	jdhcp.c \
 	jmodule.c \
+	jauth.c \
 	jnet.c
 
 noinst_HEADERS = common.h \
@@ -49,6 +50,7 @@ noinst_HEADERS = common.h \
 	wd_util.h \
 	jdhcp.h \
 	jmodule.h \
+	jauth.h \
 	jnet.h
 
 wdctl_LDADD = libgateway.a

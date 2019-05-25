@@ -8,6 +8,8 @@
 #ifndef SRC_JAUTH_H_
 #define SRC_JAUTH_H_
 
+#include "httpd.h"
+
     typedef struct {
         int port, serverSock, startTime, lastError;
         char fileBasePath[HTTP_MAX_URL], *host;
@@ -21,6 +23,7 @@
     } authrequest;
 
     authsvr* authsvrCreate(char *host, int port);
-    int jauthconnect(httpd *server, int index);
+    int jauthconnect(authsvr *server, int index);
+
 
 #endif /* SRC_JAUTH_H_ */

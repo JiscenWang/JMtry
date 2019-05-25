@@ -4,7 +4,27 @@
  *  Created on: Apr 30, 2019
  *      Author: jerome
  */
+#include <stdio.h>
+#include <stdlib.h>
+#include <syslog.h>
+#include <pthread.h>
+#include <signal.h>
+#include <errno.h>
+#include <time.h>
 
+/* for strerror() */
+#include <string.h>
+
+/* for wait() */
+#include <sys/wait.h>
+
+/* for unix socket communication*/
+#include <sys/socket.h>
+#include <sys/un.h>
+
+#include "common.h"
+#include "jconfig.h"
+#include "debug.h"
 #include "jauth.h"
 
 
