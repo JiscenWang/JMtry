@@ -89,7 +89,7 @@ end, Jeomre*/
 #define DHCP_MAX_CLIENTS              16 /* Maximum DHCP clients supported */
 #define DHCP_HASH_TABLE              64 /* Maximum DHCP hash table size */
 #define DHCP_LEASE_TIME              3000 /* DHCP lease time */
-#define DHCP_DYN_IP_POOL              "192.168.168.1" /* Start of DHCP dynamic pool */
+#define DHCP_DYN_IP_POOL              "192.168.168.3" /* Start of DHCP dynamic pool */
 #define DHCP_DHCP_LISTENR              "192.168.168.168" /* IP address of DHCP listener */
 #define DHCP_TUN_AND_DOG              "192.168.168.169" /* IP address of TUN and Wifidog Gateway */
 #define DHCP_CLIENT_DNS1			"114.114.114.114"
