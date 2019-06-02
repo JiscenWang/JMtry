@@ -3079,8 +3079,8 @@ int dhcp_receive_ip(struct dhcp_ctx *ctx, uint8_t *pack, size_t len) {
 
   srcaddr.s_addr = pack_iph->saddr;
   dstaddr.s_addr = pack_iph->daddr;
-  debug(LOG_DEBUG, "DHCP Get packet from IP %s", inet_ntoa(srcaddr));
-  debug(LOG_DEBUG, "DHCP Get packet to IP %s", inet_ntoa(dstaddr));
+  debug(LOG_DEBUG, "DHCP received packet from IP %s", inet_ntoa(srcaddr));
+  debug(LOG_DEBUG, "DHCP received packet to IP %s", inet_ntoa(dstaddr));
 
   /*
    *  Check to see if we know MAC address
@@ -3372,8 +3372,8 @@ end, Jerome*/
   if (this->cb_data_ind) {
 	  srcaddr.s_addr = pack_iph->saddr;
 	  dstaddr.s_addr = pack_iph->daddr;
-	  debug(LOG_DEBUG, "DHCP Get packet from IP %s", inet_ntoa(srcaddr));
-	  debug(LOG_DEBUG, "DHCP Get packet to IP %s", inet_ntoa(dstaddr));
+	  debug(LOG_DEBUG, "DHCP sending packet from IP %s", inet_ntoa(srcaddr));
+	  debug(LOG_DEBUG, "DHCP sending packet to IP %s", inet_ntoa(dstaddr));
 
     this->cb_data_ind(conn, pack, len);
   } else {
