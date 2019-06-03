@@ -181,7 +181,7 @@ sigchld_handler(int s)
 
     debug(LOG_DEBUG, "Handler for SIGCHLD called. Trying to reap a child");
 
-//    rc = waitpid(-1, &status, WNOHANG);
+    rc = waitpid(-1, &status, WNOHANG);
 
     debug(LOG_DEBUG, "Handler for SIGCHLD reaped child PID %d", rc);
 }
@@ -630,7 +630,7 @@ main_loop(void)
       debug(LOG_ERR, "Failed to create tun");
       exit(1);
     }
-    debug(LOG_DEBUG, "Create tun name of %s", config->tundevname);
+    debug(LOG_DEBUG, "Create tun name of %s with fd %d", config->tundevname, tun->_tuntap.fd);
     register_fd_cleanup_on_fork(tun->_tuntap.fd);
 
     tun_setaddr(tun, &config->tundevip, &config->tundevip, &config->netmask);
@@ -690,11 +690,11 @@ main_loop(void)
 
 
 	/* Initializes the web server */
-    debug(LOG_NOTICE, "Creating web server on %s:%d", config->gw_address, config->gw_port);
     if ((webserver = httpdCreate(config->gw_address, config->gw_port)) == NULL) {
         debug(LOG_ERR, "Could not create web server: %s", strerror(errno));
         exit(1);
     }
+    debug(LOG_NOTICE, "Created web server on %s:%d with socket %d", config->gw_address, config->gw_port, webserver->serverSock);
     register_fd_cleanup_on_fork(webserver->serverSock);
 
     /*Jerome: Add J-module*/
@@ -718,18 +718,20 @@ main_loop(void)
 
 
 	/* Initializes the auth server */
+/*
     debug(LOG_NOTICE, "Creating Auth server on %s:%d", config->gw_address, config->auth_port);
     if ((authserver = authsvrCreate(config->gw_address, config->auth_port)) == NULL) {
         debug(LOG_ERR, "Could not create Auth server: %s", strerror(errno));
         exit(1);
     }
     register_fd_cleanup_on_fork(authserver->serverSock);
-
+*/
     /*Jerome: Add J-module*/
+    /*
     net_select_reg(&sctx, authserver->serverSock,
                    SELECT_READ, (select_callback)jauthconnect,
 				   authserver, 0);
-
+*/
     /*End, Jerome*/
 
     fw_destroy();

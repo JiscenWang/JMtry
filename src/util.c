@@ -122,7 +122,7 @@ execute(const char *cmd_line, int quiet)
     debug(LOG_DEBUG, "Process PID %d exited", rc);
     
     if (-1 == rc) {
-        debug(LOG_ERR, "waitpid() failed (%s)", strerror(errno));
+        debug(LOG_ERR, "waitpid() failed (%s), or child PID is cought by SIGCHLD signals", strerror(errno));
         return 1; /* waitpid failed. */
     }
 

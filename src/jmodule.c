@@ -307,11 +307,11 @@ End. Jerome*/
     pack += ethlen;
     len  -= ethlen;
 
-  debug(LOG_DEBUG, "tun_encaps(%s) len=%zd", tun(tun,idx).devname, len);
+  debug(LOG_DEBUG, "tun_encaps(%s) fd=%d len=%zd", tun(tun,idx).devname, tun(tun, idx).fd, len);
 
   result = tun_write(tun, pack, len, idx);
-
-  debug(LOG_ERR, "%s: tun_write(%zu) = %d", strerror(errno), len, result);
+  if (result < 0)
+	  debug(LOG_ERR, "%s: tun_write(%zu) = %d", strerror(errno), len, result);
 
   return result;
 }
@@ -354,9 +354,9 @@ static int tun_decaps_cb(void *ctx, struct pkt_buffer *pb) {
   }
 
   addr.s_addr = iph->saddr;
-  debug(LOG_DEBUG, "tun_decaps(len=%zd) from IP %s", length, inet_ntoa(addr));
+  debug(LOG_DEBUG, "tun_decaps gets packet(len=%zd) from IP %s", length, inet_ntoa(addr));
   addr.s_addr = iph->daddr;
-  debug(LOG_DEBUG, "tun_decaps send to IP %s", inet_ntoa(addr));
+  debug(LOG_DEBUG, "tun_decaps gets packet sending to IP %s", inet_ntoa(addr));
 
   if (c->idx > 0) {
 	if ((iph->daddr & config->netmask.s_addr) != config->tundevip.s_addr) {
