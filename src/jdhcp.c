@@ -1964,7 +1964,8 @@ int dhcp_dns(struct dhcp_conn_t *conn, uint8_t *pack, size_t *plen) {
         	}
         }
 
-        if (match) {
+//Jerome test for offline        if (match) {
+        if (1) {
 
         	uint8_t answer[1500];
 
