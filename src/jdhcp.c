@@ -1964,8 +1964,7 @@ int dhcp_dns(struct dhcp_conn_t *conn, uint8_t *pack, size_t *plen) {
         	}
         }
 
-//Jerome test for offline        if (match) {
-        if (1) {
+        if (match) {
 
         	uint8_t answer[1500];
 
@@ -3374,7 +3373,7 @@ end, Jerome*/
 	  srcaddr.s_addr = pack_iph->saddr;
 	  dstaddr.s_addr = pack_iph->daddr;
 	  debug(LOG_DEBUG, "DHCP sending packet from IP %s", inet_ntoa(srcaddr));
-	  debug(LOG_DEBUG, "DHCP sending packet to IP %s", inet_ntoa(dstaddr));
+	  debug(LOG_DEBUG, "DHCP sending packet to IP %s of length %d", inet_ntoa(dstaddr), len);
 
     this->cb_data_ind(conn, pack, len);
   } else {
