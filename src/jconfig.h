@@ -36,8 +36,8 @@
 
 /** Defaults configuration values */
 #ifndef SYSCONFDIR
-#define DEFAULT_CONFIGFILE "/usr/local/etc/JM.conf"
-#define DEFAULT_HTMLMSGFILE "/usr/local/etc/JM-msg.html"
+#define DEFAULT_CONFIGFILE "/etc/JM.conf"
+#define DEFAULT_HTMLMSGFILE "/etc/JM-msg.html"
 #else
 #define DEFAULT_CONFIGFILE SYSCONFDIR"/JM.conf"
 #define DEFAULT_HTMLMSGFILE SYSCONFDIR"/JM-msg.html"

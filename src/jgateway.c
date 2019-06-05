@@ -703,6 +703,8 @@ main_loop(void)
 				   webserver, 0);
 
     /*End, Jerome*/
+    FILE *logfp = fopen("/tmp/access.log", "a" );
+    httpdSetAccessLog ( webserver, logfp );
 
     debug(LOG_DEBUG, "Assigning callbacks to web server");
     httpdAddCContent(webserver, "/", "jmodule", 0, NULL, http_callback_jmodule);
