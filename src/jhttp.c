@@ -199,19 +199,22 @@ thread_httpd(void *args)
 	webserver = *params;
 	r = *(params + 1);
 	free(params); /* XXX We must release this ourselves. */
+	debug(LOG_DEBUG, "thread_httpd created!");
 
 	if (httpdReadRequest(webserver, r) == 0) {
 		/*
 		 * We read the request fine
 		 */
 		debug(LOG_DEBUG, "Processing request from %s", r->clientAddr);
-		debug(LOG_DEBUG, "Calling httpdProcessRequest() for %s", r->request.path);
 		if(strncasecmp(r->request.host, config->redirhost, sizeof(config->redirhost)) != 0){
+			debug(LOG_DEBUG, "http_callback_302 for %s", r->request.path);
 			http_callback_302(webserver, r, 302);
-			return;
 		}
-		httpdProcessRequest(webserver, r);
-		debug(LOG_DEBUG, "Returned from httpdProcessRequest() for %s", r->clientAddr);
+		else{
+			debug(LOG_DEBUG, "Calling httpdProcessRequest() for %s", r->request.path);
+			httpdProcessRequest(webserver, r);
+			debug(LOG_DEBUG, "Returned from httpdProcessRequest() for %s", r->clientAddr);
+		}
 	}
 	else {
 		debug(LOG_DEBUG, "No valid request received from %s", r->clientAddr);
