@@ -736,13 +736,14 @@ main_loop(void)
 */
     /*End, Jerome*/
 
-    fw_destroy();
+//    fw_destroy();
     /* Then initialize it */
+    /*
     if (!fw_init()) {
         debug(LOG_ERR, "FATAL: Failed to initialize firewall");
         exit(1);
     }
-
+*/
 
     /* Start clean up thread */
     result = pthread_create(&tid_fw_counter, NULL, (void *)thread_client_timeout_check, NULL);
